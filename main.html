@@ -1,0 +1,232 @@
+<!doctype html>
+<html class="export bg" lang="de">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <meta name="description" content="Filter &amp; sort magical layouts">
+  <!-- Isotope does not require any CSS files -->
+  <link rel="stylesheet" href="css/isotope-docs.css?6" media="screen">
+  <script>
+
+    function experience(exp) {
+      if (exp == "Erfahren" && exp != null) {
+        var element1 = document.getElementById("Unerfahren");
+        element1.style.opacity = "0";
+        element1.style.transition = "opacity 500ms";
+        setTimeout(() => {
+          element1.style.visibility = "hidden";
+        }, 500);
+
+
+
+        document.getElementById("Container").appendChild(document.getElementById("Unerfahren"));
+        document.getElementById("Erfahren").style.visibility = "visible";
+        document.getElementById("Unerfahren").style.visibility = "hidden";
+        document.getElementById("Unerf").style.backgroundColor = "#1199ff";
+        document.getElementById("Erf").style.backgroundColor = "transparent";
+        var element = document.getElementById("Erfahren");
+        element.style.opacity = "1";
+        element.style.transition = "opacity 500ms";
+
+        console.log("Erf");
+      }
+      else {
+        var element1 = document.getElementById("Erfahren");
+        element1.style.opacity = "0";
+        element1.style.transition = "opacity 500ms";
+        setTimeout(() => {
+          element1.style.visibility = "hidden";
+        }, 500);
+
+
+        document.getElementById("Container").appendChild(document.getElementById("Erfahren"));
+
+        document.getElementById("Unerf").style.backgroundColor = "transparent";
+        document.getElementById("Erf").style.backgroundColor = "#1199ff";
+
+        var element = document.getElementById("Unerfahren");
+        element.style.opacity = "1";
+        element.style.transition = "opacity 500ms";
+        document.getElementById("Unerfahren").style.visibility = "visible";
+        console.log("Unerf");
+      }
+      sizeIt();
+    }
+
+    function closeFilter() {
+      var element = document.getElementById("Filter");
+      element.style.opacity = "0";
+      element.style.transition = "opacity 500ms";
+
+      setTimeout(() => { element.style.visibility = "hidden"; }, 300);
+      console.log("HideFilter");
+    }
+
+    function showFilter(Elem) {
+      document.getElementById("Topic").innerHTML = String(Elem);
+      document.getElementById("Text").innerHTML = String(TextBib(Elem));
+      var element = document.getElementById("Filter");
+      element.style.visibility = "visible";
+      element.style.opacity = "1";
+      element.style.transition = "opacity 300ms";
+      console.log("ShowedFilter");
+    }
+
+    function sizeIt() {
+      document.getElementById("Erfahren").style.height = "auto";
+      document.getElementById("Unerfahren").style.height = "auto";
+    }
+  </script>
+</head>
+
+<body class="bg">
+  <div id="Filter">
+    <div id="AboveALL">
+      <button id="X" onclick="closeFilter()">+</button>
+      <h2 id="Topic">Brainstorming</h1>
+        <p id="Text">Beim Brainstorming sammeln wir schnell eine Vielzahl von Ideen. Dabei gibt es keine schlechten
+          Ideen,
+          da es hier zunächst nur um die reine Ideensammlung geht und nicht um die Bewertung. Die Ideen werden dabei auf
+          Papier oder digital festgehalten.</p>
+    </div>
+  </div>
+
+
+  <div style="height: 50px;">
+  </div>
+  <h2 id="combination-filters" style="margin-left: 10%">Das digitale Rapid Service Prototyping Referenzmodell (Work in
+    Progress)</h2>
+
+  <p style="margin-left: 10%; margin-right: 10%">Auf dieser Seite können Sie anhand Ihrer Erfahrung, Zeit und
+    Ressourcengröße die idealen Prototyping filtern.</p>
+
+  <div class="big-demo" data-js="combination-filters">
+
+    <div class="ui-group center" style="margin-bottom: 15px;">
+      <p class="ui-group__title">Erfahrung: </p>
+      <div class="button-group js-radio-button-group">
+        <button class="button-group buttonErfahren is-checked" style=" border: #1199ff" id="Erf"
+          onclick="experience('Unerfahren')">Unerfahren</button>
+        <button class="button-group buttonErfahren" id="Unerf" style=" border: #1199ff"
+          onclick="experience('Erfahren')">Erfahren</button>
+      </div>
+    </div>
+    <div class="ui-group center" style="margin-bottom: 15px;">
+      <p class="ui-group__title">Zeit: </p>
+      <div class="button-group js-radio-button-group" data-filter-group="color">
+        <button class="button is-checked" data-filter="">Egal</button>
+        <button class="button" data-filter=".Stunde">Stunde</button>
+        <button class="button" data-filter=".Tag">Tag</button>
+        <button class="button" data-filter=".Woche">Woche</button>
+      </div>
+    </div>
+
+    <div class="ui-group center" style="margin-bottom: 2%;">
+      <p class="ui-group__title">Ressourcen: </p>
+      <div class="button-group js-radio-button-group" data-filter-group="size">
+        <button class="button is-checked" data-filter="">Egal</button>
+        <button class="button" data-filter=".1">1</button>
+        <button class="button" data-filter=".2">2</button>
+        <button class="button" data-filter=".3">3</button>
+        <button class="button" data-filter=".4">4</button>
+        <button class="button" data-filter=".5">5</button>
+      </div>
+    </div>
+
+    <!--<pre class="code-display"><code>$grid.isotope({...})</code></pre> -->
+    <div id="Container">
+      <div class="grid" id="Unerfahren" style="visibility: visible; opacity: 1; height: auto;">
+        <img onclick="showFilter('Brainstorming')" src="img/Brainstorming.jpg"
+          class="color-shape Stunde Tag Woche 1 2 3 4 5">
+        <img onclick="showFilter('Case Study')" src="img/Case Study.jpg" class="color-shape Woche Tag 1 2 3 4 5">
+        <img onclick="showFilter('Mind Map')" src="img/Mind Map.jpg" class="color-shape Stunde Tag Woche 1 2 3 4 5">
+        <img onclick="showFilter('Offering Map')" src="img/Offering Map.jpg"
+          class="color-shape Stunde Tag Woche 1 2 3 4 5">
+        <img onclick="showFilter('Design Fiction')" src="img/Design Fiction.jpg" class="color-shape Tag Woche 2 3 4 5">
+        <img onclick="showFilter('Personas')" src="img/Personas.jpg" class="color-shape Stunde Tag Woche  2 3 4 5">
+        <img onclick="showFilter('Roleplay')" src="img/Roleplay.jpg" class="color-shape Stunde Tag Woche  2 3 4 5">
+        <img onclick="showFilter('Storytelling')" src="img/Storytelling.jpg"
+          class="color-shape Stunde Tag Woche  2 3 4 5">
+        <img onclick="showFilter('Voice of Customer Analysis')" src="img/Voice of Customer Analysis.jpg"
+          class="color-shape Tag Woche 2 3 4 5">
+        <img onclick="showFilter('Concept Map')" src="img/Concept Map.jpg" class="color-shape Tag Woche 3 4 5">
+        <img onclick="showFilter('Cross Channel Views')" src="img/Cross Channel Views.jpg"
+          class="color-shape Tag Woche 3 4 5">
+        <img onclick="showFilter('Lego Serious Play')" src="img/Lego Serious Play.jpg"
+          class="color-shape Stunde Tag Woche 3 4 5">
+        <img onclick="showFilter('Storyboard')" src="img/Storyboard.jpg" class="color-shape Tag Woche 3 4 5">
+        <img onclick="showFilter('Understanding Workshop')" src="img/Understanding Workshop.jpg"
+          class="color-shape Tag Woche 3 4 5">
+        <img onclick="showFilter('Cognitive Walktrough')" src="img/Cognitive Walktrough.jpg"
+          class="color-shape Tag Woche 4 5">
+        <img onclick="showFilter('Customer Journey Map')" src="img/Customer Journey Map.jpg"
+          class="color-shape Tag Woche 4 5">
+        <img onclick="showFilter('Design Games')" src="img/Design Games.jpg" class="color-shape Woche 4 5">
+        <img onclick="showFilter('Imagine Workshop')" src="img/Imagine Workshop.jpg" class="color-shape Tag Woche 4 5">
+        <img onclick="showFilter('Video Prototyping')" src="img/Video Prototyping.jpg"
+          class="color-shape Tag Woche 4 5">
+        <img onclick="showFilter('Rapid Prototyping')" src="img/Rapid Prototyping.jpg" class="color-shape Woche 5">
+        <img onclick="showFilter('Recommendation Configurator')" src="img/Recommendation Configurator.jpg"
+          class="color-shape Woche 5">
+        <img onclick="showFilter('Service Blueprint')" src="img/Service Blueprint.jpg" class="color-shape Woche  5">
+        <img onclick="showFilter('Virtual Simulation')" src="img/Virtual Simulation.jpg" class="color-shape Woche 5">
+        <img onclick="showFilter('Short Clips')" src="img/Short Clips.jpg" class="color-shape Tag Woche 3 4 5">
+      </div>
+      <!--Erfahren-->
+      <div class="grid" id="Erfahren" style="visibility: hidden; opacity: 0;">
+        <img onclick="showFilter('Brainstorming')" src="img/Brainstorming.jpg"
+          class="color-shape Stunde Tag Woche 1 2 3 4 5">
+        <img onclick="showFilter('Case Study')" src="img/Case Study.jpg" class="color-shape Woche Tag 1 2 3 4 5">
+        <img onclick="showFilter('Mind Map')" src="img/Mind Map.jpg" class="color-shape Stunde Tag Woche 1 2 3 4 5">
+        <img onclick="showFilter('Offering Map')" src="img/Offering Map.jpg"
+          class="color-shape Stunde Tag Woche 1 2 3 4 5">
+        <img onclick="showFilter('Design Fiction')" src="img/Design Fiction.jpg"
+          class="color-shape Stunde Tag Woche 2 3 4 5">
+        <img onclick="showFilter('Personas')" src="img/Personas.jpg" class="color-shape Stunde Tag Woche 2 3 4 5">
+        <img onclick="showFilter('Roleplay')" src="img/Roleplay.jpg" class="color-shape Stunde Tag Woche 1 2 3 4 5">
+        <img onclick="showFilter('Storytelling')" src="img/Storytelling.jpg"
+          class="color-shape Stunde Tag Woche 2 3 4 5">
+        <img onclick="showFilter('Voice of Customer Analysis')" src="img/Voice of Customer Analysis.jpg"
+          class="color-shape Tag Woche 2 3 4 5">
+        <img onclick="showFilter('Concept Map')" src="img/Concept Map.jpg" class="color-shape Stunde Woche Tag 2 3 4 5">
+        <img onclick="showFilter('Cross Channel Views')" src="img/Cross Channel Views.jpg"
+          class="color-shape Stunde Tag Woche 2 3 4 5">
+        <img onclick="showFilter('Lego Serious Play')" src="img/Lego Serious Play.jpg"
+          class="color-shape Stunde Tag Woche 3 4 5">
+        <img onclick="showFilter('Short Clips')" src="img/Short Clips.jpg" class="color-shape Tag Woche 3 4 5">
+        <img onclick="showFilter('Storyboard')" src="img/Storyboard.jpg" class="color-shape Tag Woche 3 4 5">
+        <img onclick="showFilter('Understanding Workshop')" src="img/Understanding Workshop.jpg"
+          class="color-shape Stunde Tag Woche 2 3 4 5">
+        <img onclick="showFilter('Cognitive Walktrough')" src="img/Cognitive Walktrough.jpg"
+          class="color-shape Tag Woche 4 5">
+        <img onclick="showFilter('Customer Journey Map')" src="img/Customer Journey Map.jpg"
+          class="color-shape Stunde Tag Woche 3 4 5">
+        <img onclick="showFilter('Design Games')" src="img/Design Games.jpg" class="color-shape Stunde Woche 3 4 5">
+        <img onclick="showFilter('Imagine Workshop')" src="img/Imagine Workshop.jpg"
+          class="color-shape Stunde Tag Woche 3 4 5">
+        <img onclick="showFilter('Video Prototyping')" src="img/Video Prototyping.jpg"
+          class="color-shape Tag Woche 3 4 5">
+        <img onclick="showFilter('Rapid Prototyping')" src="img/Rapid Prototyping.jpg"
+          class="color-shape Tag Woche 4 5">
+        <img onclick="showFilter('Recommendation Configurator')" src="img/Recommendation Configurator.jpg"
+          class="color-shape Woche 5">
+        <img onclick="showFilter('Service Blueprint')" src="img/Service Blueprint.jpg"
+          class="color-shape Tag Woche 4 5">
+        <img onclick="showFilter('Virtual Simulation')" src="img/Virtual Simulation.jpg" class="color-shape Woche 4 5">
+      </div>
+    </div>
+  </div>
+
+  <!-- Looking for isotope.js? Use isotope.pkgd.min.js -->
+  <!-- Isotope does NOT require jQuery. But it does make things easier -->
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+  <script src="bib.js"></script>
+  <script>window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')</script>
+
+  <script src="js/isotope-docs.min.js?6"></script>
+
+
+</body>
+
+</html>
