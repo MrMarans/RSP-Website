@@ -2686,6 +2686,7 @@ you can use the generic selector below, but it's slower:
   height: auto;
   margin: 5px;
   float: left;
+  cursor: pointer;
 }
  
 .color-shape.round {
